@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
-
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import NoDataFound from "../../NoDataFound/NoDataFound";
-import AddButton from "../../Parts/AddButton";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchColorsAction } from "../../../redux/slices/colors/colorsSlice";
+import { ErrorMsg, NoDataFound } from "../../Notifications/index.js";
+import { LoadingComponent, AddButton } from "../../Parts/index.js";
 
 export default function Colors() {
   //dispatch

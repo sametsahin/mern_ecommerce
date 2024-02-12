@@ -16,7 +16,7 @@ const initialState = {
   error: null,
   isAdded: false,
   isUpdated: false,
-  isDelete: false,
+  isDeleted: false,
 };
 
 //create brand action
@@ -30,7 +30,7 @@ export const createBrandAction = createAsyncThunk(
 
       //Images
       const { data } = await axios.post(
-        `${baseURL}brands`,
+        `${baseURL}brands/create`,
         {
           name,
         },
@@ -43,12 +43,46 @@ export const createBrandAction = createAsyncThunk(
   }
 );
 
+//update brand action
+export const updateBrandAction = createAsyncThunk(
+  "brand/update",
+  async ({ name, id }, { rejectWithValue, getState, dispatch }) => {
+    try {
+      //Token - Authenticated
+      const token = getToken(getState());
+      const config = configFile(token);
+
+      const { data } = await axios.put(
+        `${baseURL}brands/update/${id}`,
+        { name },
+        config
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 //fetch brands action
 export const fetchBrandsAction = createAsyncThunk(
-  "brands/fetch All",
+  "brands/fetch-all",
   async (payload, { rejectWithValue, getState, dispatch }) => {
     try {
       const { data } = await axios.get(`${baseURL}brands`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+//fetch single coupon action
+export const fetchSingleBrandAction = createAsyncThunk(
+  "brands/single",
+  async (id, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const { data } = await axios.get(`${baseURL}brands/detail/${id}`, { id });
       return data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);
@@ -67,16 +101,30 @@ const brandsSlice = createSlice({
     });
     builder.addCase(createBrandAction.fulfilled, (state, action) => {
       state.loading = false;
-      state.brand = action.payload;
       state.isAdded = true;
+      state.brand = action.payload;
     });
     builder.addCase(createBrandAction.rejected, (state, action) => {
       state.loading = false;
-      state.brand = null;
       state.isAdded = false;
+      state.brand = null;
       state.error = action.payload;
     });
-
+    //update
+    builder.addCase(updateBrandAction.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateBrandAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.brand = action.payload;
+      state.isUpdated = true;
+    });
+    builder.addCase(updateBrandAction.rejected, (state, action) => {
+      state.loading = false;
+      state.brand = null;
+      state.isUpdated = false;
+      state.error = action.payload;
+    });
     //fetch all
     builder.addCase(fetchBrandsAction.pending, (state) => {
       state.loading = true;
@@ -84,22 +132,33 @@ const brandsSlice = createSlice({
     builder.addCase(fetchBrandsAction.fulfilled, (state, action) => {
       state.loading = false;
       state.brands = action.payload;
-      state.isAdded = true;
+      state.isAdded = false;
+      state.isUpdated = false;
     });
     builder.addCase(fetchBrandsAction.rejected, (state, action) => {
       state.loading = false;
       state.brands = null;
-      state.isAdded = false;
+      state.error = action.payload;
+    });
+    //fetch single
+    builder.addCase(fetchSingleBrandAction.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchSingleBrandAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.brand = action.payload;
+    });
+    builder.addCase(fetchSingleBrandAction.rejected, (state, action) => {
+      state.loading = false;
+      state.brand = null;
       state.error = action.payload;
     });
     //reset error action
     builder.addCase(resetErrAction.pending, (state, action) => {
-      state.isAdded = false;
       state.error = null;
     });
     //reset success action
     builder.addCase(resetSuccessAction.pending, (state, action) => {
-      state.isAdded = false;
       state.error = null;
     });
   },

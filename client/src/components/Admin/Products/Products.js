@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import NoDataFound from "../../NoDataFound/NoDataFound";
-import { fetchAllProductsAction } from "../../../redux/slices/products/productsSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllProductsAction } from "../../../redux/slices/products/productsSlice";
 import baseURL from "../../../utils/baseURL";
-import AddButton from "../../Parts/AddButton";
-import ConditionalSpan from "../../Parts/ConditionalSpan";
+
+import { ErrorMsg, NoDataFound } from "../../Notifications/index.js";
+import {
+  LoadingComponent,
+  AddButton,
+  ConditionalSpan,
+} from "../../Parts/index.js";
 
 export default function Products() {
   let productUrl = `${baseURL}products`;

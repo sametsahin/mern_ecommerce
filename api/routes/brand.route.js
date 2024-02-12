@@ -10,11 +10,10 @@ import isLoggedIn from "../middlewares/isLoggedIn.js";
 
 const router = express.Router();
 
-router.route("/").post(isLoggedIn, create).get(getAll);
-router
-  .route("/:id")
-  .get(getSingle)
-  .put(isLoggedIn, update)
-  .delete(isLoggedIn, deleteBrand);
+router.get("/", getAll);
+router.post("/create", isLoggedIn, create);
+router.put("/update/:id", update);
+router.get("/detail/:id", getSingle);
+router.delete("/delete/:id", isLoggedIn, deleteBrand);
 
 export default router;

@@ -3,52 +3,58 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Bounce, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-//components
-import Navbar from "./components/Navbar/Navbar";
+//parts
+import Navbar from "./components/Parts/Navbar.js";
 
 //admin
-import AdminDashboard from "./components/Admin/AdminDashboard";
-import Settings from "./components/Admin/Settings.js";
-
-import { Brands, AddBrand, UpdateBrand } from "./components/Admin/Brands";
 import {
+  AdminDashboard,
+  Brands,
+  AddBrand,
+  UpdateBrand,
   Categories,
   AddCategory,
   UpdateCategory,
-} from "./components/Admin/Categories";
-import { Colors, AddColor, UpdateColor } from "./components/Admin/Colors";
-import { Coupons, AddCoupon, UpdateCoupon } from "./components/Admin/Coupons";
-import {
+  Colors,
+  AddColor,
+  UpdateColor,
+  Coupons,
+  AddCoupon,
+  UpdateCoupon,
   Customers,
   AddCustomer,
   UpdateCustomer,
-} from "./components/Admin/Customers";
-import {
   Orders,
   OrdersList,
   OrdersStats,
   UpdateOrder,
-} from "./components/Admin/Orders";
-import {
   Products,
   AddProduct,
   UpdateProduct,
-} from "./components/Admin/Products";
+  Settings,
+} from "./components/Admin/index.js";
 
-//frontpage
-import { HomePage, AllCategories } from "./components/HomePage";
-//users
-import { Login, RegisterForm } from "./components/Users/Forms";
+//front
 import {
   OrderPayment,
-  Product,
   ShoppingCart,
+  CustomerProfile,
+  Login,
+  RegisterForm,
+  AllCategories,
+  HomePage,
+  ProductPage,
   ProductsFilters,
+  AddReview,
+} from "./components/Front/index.js";
+
+//notifications
+import {
   ThanksForOrdering,
-} from "./components/Users/Products";
-import { CustomerProfile } from "./components/Users/Profile";
-import AddReview from "./components/Users/Reviews/AddReview";
-import { AdminRoute, AuthRoute } from "./components/AuthRoute/index.js";
+  CancelOrder,
+} from "./components/Notifications/index.js";
+import AdminRoute from "./components/AuthRoute/AdminRoute.js";
+import AuthRoute from "./components/AuthRoute/AuthRoute.js";
 
 const App = () => {
   return (
@@ -254,26 +260,6 @@ const App = () => {
           />
         </Route>
         {/* public links */}
-        <Route path="order-payment" element={<OrderPayment />} />
-        {/* Products */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/products-filters" element={<ProductsFilters />} />
-        <Route path="/products/:id" element={<Product />} />
-        <Route path="/all-categories" element={<AllCategories />} />
-        <Route path="success" element={<ThanksForOrdering />} />
-
-        {/* review */}
-        <Route
-          path="/add-review/:id"
-          element={
-            <AuthRoute>
-              <AddReview />
-            </AuthRoute>
-          }
-        />
-
-        {/* shopping cart */}
-        <Route path="/shopping-cart" element={<ShoppingCart />} />
         <Route
           path="/order-payment"
           element={
@@ -282,10 +268,7 @@ const App = () => {
             </AuthRoute>
           }
         />
-
-        {/* users */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/shopping-cart" element={<ShoppingCart />} />
         <Route
           path="/customer-profile"
           element={
@@ -294,6 +277,22 @@ const App = () => {
             </AuthRoute>
           }
         />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/all-categories" element={<AllCategories />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products/:id" element={<ProductPage />} />
+        <Route path="/products-filters" element={<ProductsFilters />} />
+        <Route
+          path="/add-review/:id"
+          element={
+            <AuthRoute>
+              <AddReview />
+            </AuthRoute>
+          }
+        />
+        <Route path="success" element={<ThanksForOrdering />} />
+        <Route path="cancel" element={<CancelOrder />} />
       </Routes>
       <ToastContainer
         position="top-right"

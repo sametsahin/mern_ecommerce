@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
+import { ErrorMsg, SuccessMsg } from "../../Notifications/index.js";
+import { LoadingComponent } from "../../Parts/index.js";
 
 export default function UpdateCoupon() {
   //---Fetch coupon ---
@@ -110,7 +109,8 @@ export default function UpdateCoupon() {
                 ) : (
                   <button
                     type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
                     Update Coupon
                   </button>
                 )}

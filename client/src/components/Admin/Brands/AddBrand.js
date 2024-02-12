@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
 import { createBrandAction } from "../../../redux/slices/brands/brandsSlice";
-
+import { ErrorMsg, SuccessMsg } from "../../Notifications/index.js";
+import { LoadingComponent } from "../../Parts/index.js";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 export default function AddBrand() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   //form data
   const [formData, setFormData] = useState({
     name: "",
   });
+
+  //get data from store
+  const { error, loading, isAdded } = useSelector((state) => state?.brands);
+
   //onChange
   const handleOnChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,13 +30,16 @@ export default function AddBrand() {
       name: "",
     });
   };
-  //get data from store
-  const { error, loading, isAdded } = useSelector((state) => state?.brands);
+  if (error) {
+    toast.error(error.message);
+  }
+  if (isAdded) {
+    navigate(-1);
+    toast.success(`${formData.name} has been added`);
+  }
 
   return (
     <>
-      {isAdded && <SuccessMsg message="Brand Created Successfully" />}
-      {error && <ErrorMsg message={error?.message} />}
       <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <svg

@@ -1,5 +1,5 @@
 import React from "react";
-import { Login } from "../Users/Forms";
+import Login from "../Front/Forms/Login";
 
 const AuthRoute = ({ children }) => {
   //get user from local storage

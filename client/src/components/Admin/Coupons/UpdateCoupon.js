@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-
-import "react-datepicker/dist/react-datepicker.css";
-import { useParams } from "react-router-dom";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   fetchSingleCouponAction,
   updateCouponAction,
 } from "../../../redux/slices/coupons/couponsSlice";
+import { ErrorMsg, SuccessMsg } from "../../Notifications/index.js";
+import { LoadingComponent } from "../../Parts/index.js";
 
 export default function UpdateCoupon() {
   const dispatch = useDispatch();

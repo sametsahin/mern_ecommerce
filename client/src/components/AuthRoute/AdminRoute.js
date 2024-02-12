@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { getUserProfileAction } from "../../redux/slices/users/usersSlice";
-import AdminOnly from "../NotAuthorized/AdminOnly";
+import { AdminOnly } from "../Notifications/index.js";
 
 const AdminRoutes = ({ children }) => {
   //dispatch

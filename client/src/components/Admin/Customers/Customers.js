@@ -1,8 +1,8 @@
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import NoDataFound from "../../NoDataFound/NoDataFound";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllOrdersAction } from "../../../redux/slices/orders/ordersSlice";
-import { useEffect } from "react";
+import { NoDataFound } from "../../Notifications/index.js";
+import { LoadingComponent } from "../../Parts/index.js";
 
 export default function Customers() {
   //dispatch

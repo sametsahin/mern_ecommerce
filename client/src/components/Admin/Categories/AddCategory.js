@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ErrorComponent from "../../ErrorMsg/ErrorMsg";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
+import { ErrorMsg, SuccessMsg } from "../../Notifications/index.js";
+import { LoadingComponent } from "../../Parts/index.js";
 import { createCategoryAction } from "../../../redux/slices/categories/categoriesSlice";
 
 export default function CategoryToAdd() {
@@ -44,8 +43,8 @@ export default function CategoryToAdd() {
   };
   return (
     <>
-      {error && <ErrorComponent message={error?.message} />}
-      {fileErr && <ErrorComponent message={fileErr} />}
+      {error && <ErrorMsg message={error?.message} />}
+      {fileErr && <ErrorMsg message={fileErr} />}
       {isAdded && <SuccessMsg message="Category added successfully" />}
       <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">

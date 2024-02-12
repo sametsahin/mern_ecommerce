@@ -1,19 +1,19 @@
 import { Link, useParams } from "react-router-dom";
-
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import NoDataFound from "../../NoDataFound/NoDataFound";
-import AddButton from "../../Parts/AddButton";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
   deleteCouponAction,
   fetchCouponsAction,
 } from "../../../redux/slices/coupons/couponsSlice";
-import ConditionalSpan from "../../Parts/ConditionalSpan";
-import EditButton from "../../Parts/EditButton";
-import DeleteButton from "../../Parts/DeleteButton";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { ErrorMsg, NoDataFound } from "../../Notifications/index.js";
+import {
+  LoadingComponent,
+  AddButton,
+  ConditionalSpan,
+  EditButton,
+  DeleteButton,
+} from "../../Parts/index.js";
+
 export default function Coupons() {
   const dispatch = useDispatch();
 

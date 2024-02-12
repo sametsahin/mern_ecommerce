@@ -3,18 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-
 import { fetchCategoriesAction } from "../../../redux/slices/categories/categoriesSlice";
 import {
   fetchSingleProductAction,
   updateProductAction,
 } from "../../../redux/slices/products/productsSlice";
-
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
 import { fetchBrandsAction } from "../../../redux/slices/brands/brandsSlice";
 import { fetchColorsAction } from "../../../redux/slices/colors/colorsSlice";
+
+import { ErrorMsg, SuccessMsg } from "../../Notifications/index.js";
+import { LoadingComponent } from "../../Parts/index.js";
 
 //animated components for react-select
 const animatedComponents = makeAnimated();

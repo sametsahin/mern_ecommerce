@@ -6,11 +6,10 @@ import Brand from "../models/Brand.js";
 //@access   Private/Admin
 const create = asyncHandler(async (req, res) => {
   const { name } = req.body;
-  //brand exists
+
   const brandFound = await Brand.findOne({ name });
-  if (brandFound) {
-    throw new Error("Brand already exists");
-  }
+  if (brandFound) throw new Error("Brand already exists");
+
   //create
   const brand = await Brand.create({
     name: name.toLowerCase(),
@@ -52,7 +51,7 @@ const getSingle = asyncHandler(async (req, res) => {
 });
 
 //@desc     update brand
-//@route    PUT /api/v1/brands/:id
+//@route    PUT /api/v1/brands/update/:id
 //@access   Private/admin
 const update = asyncHandler(async (req, res) => {
   const { name } = req.body;

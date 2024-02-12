@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import Order from "../models/Order.js";
 import User from "../models/User.js";
 import Product from "../models/Product.js";
-import Coupon from "../models/Coupon.js";
+import { createSessionMethod } from "./stripe.controller.js";
 
 //stripe instance
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -12,19 +12,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 //@route    POST /api/v1/orders
 //@access   Private/Admin
 const createOrd = asyncHandler(async (req, res) => {
-  //get the coupon
-  // const { coupon } = req.query;
-  // const couponFound = await Coupon.findOne({
-  //   code: coupon?.toUpperCase(),
-  // });
-
-  // if (couponFound?.isExpired) throw new Error("Coupon has expired!");
-  // if (!couponFound) throw new Error("Coupon does not exists!");
-
-  // get discount
-  // const discount = couponFound?.discount / 100;
-
-  // get the payload(customer, orderItems, shippingAddress, totalPrice)
   const { orderItems, shippingAddress, totalPrice } = req.body;
 
   //find the user
@@ -70,7 +57,6 @@ const createOrd = asyncHandler(async (req, res) => {
       quantity: item?.qty,
     };
   });
-
   const session = await stripe.checkout.sessions.create({
     line_items: convertedOrders,
     metadata: {

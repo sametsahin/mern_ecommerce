@@ -1,22 +1,13 @@
 import { useEffect } from "react";
-import { fetchAllOrdersAction } from "../../../redux/slices/orders/ordersSlice";
-import OrdersStats from "./OrdersStats";
-import { useDispatch, useSelector } from "react-redux";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
-import NoDataFound from "../../NoDataFound/NoDataFound";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllOrdersAction } from "../../../redux/slices/orders/ordersSlice";
 
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-  },
-  // More people...
-];
+import OrdersStats from "./OrdersStats";
+import { ErrorMsg, NoDataFound } from "../../Notifications/index.js";
+import { LoadingComponent } from "../../Parts/index.js";
+
+
 
 export default function OrdersList() {
   const dispatch = useDispatch();

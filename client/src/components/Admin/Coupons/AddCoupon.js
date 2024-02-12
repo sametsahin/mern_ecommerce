@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import SuccessMsg from "../../SuccessMsg/SuccessMsg";
-import { createCouponAction } from "../../../redux/slices/coupons/couponsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import DatePicker from "react-datepicker";
+import { createCouponAction } from "../../../redux/slices/coupons/couponsSlice";
+import "react-datepicker/dist/react-datepicker.css";
+import { ErrorMsg, SuccessMsg } from "../../Notifications/index.js";
+import { LoadingComponent } from "../../Parts/index.js";
 
 export default function AddCoupon() {
   const dispatch = useDispatch();

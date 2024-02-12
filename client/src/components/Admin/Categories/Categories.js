@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
-
-import ErrorMsg from "../../ErrorMsg/ErrorMsg";
-import LoadingComponent from "../../LoadingComp/LoadingComponent";
-import NoDataFound from "../../NoDataFound/NoDataFound";
-import AddButton from "../../Parts/AddButton";
-import { fetchCategoriesAction } from "../../../redux/slices/categories/categoriesSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { fetchCategoriesAction } from "../../../redux/slices/categories/categoriesSlice";
+import { ErrorMsg, NoDataFound } from "../../Notifications/index.js";
+import { LoadingComponent, AddButton } from "../../Parts/index.js";
 
 export default function Categories() {
   //dispatch
